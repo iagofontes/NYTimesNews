@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -42,13 +44,29 @@ public class MainActivity extends AppCompatActivity {
         movieReviewArrayAdapter = new MovieReviewArrayAdapter(this.getApplicationContext(), reviews);
         movieReviewListView.setAdapter(movieReviewArrayAdapter);
 
+//        @Override
+        movieReviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /*Snackbar.make(view, "Rolou um click.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                TextView titulo = (TextView) view.findViewById(R.id.titleMovie);
+                String textoTitulo = titulo.getText().toString();
+                Snackbar.make(view, textoTitulo, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+//                start
+
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Realizar a pesquisa por aqui.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Realizar a pesquisa por aqui.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
 
                 URL url = null;
                 try{

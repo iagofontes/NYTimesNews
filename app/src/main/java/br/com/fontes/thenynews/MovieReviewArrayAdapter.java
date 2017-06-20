@@ -25,6 +25,7 @@ public class MovieReviewArrayAdapter extends ArrayAdapter<MovieReviews>{
     private static class ViewHolder{
         ImageView imgNews;
         TextView titleTextView;
+        TextView publicationTextView;
     }
 
     public MovieReviewArrayAdapter (Context context, List<MovieReviews> forecast){
@@ -40,14 +41,16 @@ public class MovieReviewArrayAdapter extends ArrayAdapter<MovieReviews>{
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item, parent, false);
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.titleMovie);
+            viewHolder.publicationTextView = (TextView) convertView.findViewById(R.id.datePublic);
             viewHolder.imgNews =  (ImageView) convertView.findViewById(R.id.imageView);
             convertView.setTag(viewHolder);
         }
         else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
-//        viewHolder.titleTextView.setText(mvr.getTitle());
-        viewHolder.titleTextView.setText("Oieeeee");
+        viewHolder.titleTextView.setText(mvr.getTitle());
+        viewHolder.publicationTextView.setText(mvr.getDate_publ());
+//        viewHolder.titleTextView.setText("Oieeeee");
 
         //baixar a imagem aqui
         if((mvr.getImgPath() != null) && (mvr.getImgPath()  != "")){

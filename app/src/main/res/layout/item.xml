@@ -22,13 +22,26 @@
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_gravity="top|right"
-        android:layout_marginLeft="125dp"
         android:gravity="top|right"
         android:hint="Film name"
-        android:paddingLeft="125dp"
+        android:paddingLeft="150dp"
         android:textColor="@android:color/background_dark"
         android:textColorHint="@android:color/background_dark"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="14dp" />
+
+    <TextView
+        android:id="@+id/datePublic"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_marginTop="50dp"
+        android:gravity="top|center_horizontal|fill_horizontal"
+        android:hint="Publication"
+        android:paddingLeft="150dp"
+        android:textColor="@android:color/background_dark"
+        android:textColorHint="@android:color/background_dark"
+        android:layout_below="@+id/titleMovie"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="41dp"/>
 
 </android.support.constraint.ConstraintLayout>
