@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
@@ -13,35 +13,45 @@
         android:layout_width="124dp"
         android:layout_height="100dp"
         android:layout_gravity="top|left"
-        app:srcCompat="@mipmap/ic_launcher"
+        app:srcCompat="@mipmap/imgvideo"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
+    <!--app:srcCompat="@mipmap/ic_launcher"-->
 
-    <TextView
-        android:id="@+id/titleMovie"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_gravity="top|right"
-        android:gravity="top|right"
-        android:hint="Film name"
-        android:paddingLeft="150dp"
-        android:textColor="@android:color/background_dark"
-        android:textColorHint="@android:color/background_dark"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="14dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/datePublic"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginTop="50dp"
-        android:gravity="top|center_horizontal|fill_horizontal"
-        android:hint="Publication"
-        android:paddingLeft="150dp"
-        android:textColor="@android:color/background_dark"
-        android:textColorHint="@android:color/background_dark"
-        android:layout_below="@+id/titleMovie"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="41dp"/>
+        <TextView
+            android:id="@+id/titleMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="left|center_vertical"
+            android:hint="Film name"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="14dp" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/datePublic"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_below="@+id/titleMovie"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="left|center_vertical"
+            android:hint="Publication"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="41dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

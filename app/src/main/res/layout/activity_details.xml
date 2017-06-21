@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.fontes.thenynews.DetailsActivity">
+    android:orientation="vertical"
+    tools:context="br.com.fontes.thenynews.DetailsActivity"
+    android:weightSum="1">
 
-</android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imgMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_vertical|center_horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_weight="0.23"
+        android:foregroundGravity="top|center_vertical|center_horizontal"
+        app:srcCompat="@mipmap/imgvideo" />
+        <!--app:srcCompat="@mipmap/ic_launcher" />-->
+
+    <TextView
+        android:id="@+id/movieName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.08"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/movieDatePublic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.08"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="TextView" />
+</LinearLayout>

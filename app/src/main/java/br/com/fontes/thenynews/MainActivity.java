@@ -1,9 +1,9 @@
 package br.com.fontes.thenynews;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -44,18 +44,29 @@ public class MainActivity extends AppCompatActivity {
         movieReviewArrayAdapter = new MovieReviewArrayAdapter(this.getApplicationContext(), reviews);
         movieReviewListView.setAdapter(movieReviewArrayAdapter);
 
-//        @Override
         movieReviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*Snackbar.make(view, "Rolou um click.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-                TextView titulo = (TextView) view.findViewById(R.id.titleMovie);
-                String textoTitulo = titulo.getText().toString();
-                Snackbar.make(view, textoTitulo, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-//                start
+                TextView txtTitulo = (TextView) view.findViewById(R.id.titleMovie);
+
+                int i=0;
+                String titulo = txtTitulo.getText().toString();
+                while(!titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
+                    i++;
+                }
+                if(titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
+
+                    MovieReviews mr = reviews.get(i);
+
+                    Intent in = new Intent(view.getContext(), DetailsActivity.class);
+                    Bundle params = new Bundle();
+                    params.putString("titulo", mr.getTitle());
+                    params.putString("data", mr.getDate_publ());
+                    params.putString("imgSrc", mr.getImgPath());
+                    in.putExtras(params);
+                    startActivity(in);
+                }
 
             }
         });
@@ -87,17 +98,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    /*public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.activity_main, container, false);
-
-        movieReviewListView = (ListView) view.findViewById(R.id.movieReviewList);
-        movieReviewArrayAdapter = new MovieReviewArrayAdapter(view.getContext(), reviews);
-        movieReviewListView.setAdapter(movieReviewArrayAdapter);
-
-        return view;
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     String path = "";
                     path = mult.getString("src");
                     reviews.add(new MovieReviews(null, line.optString("display_title"),
-                            line.optString("publication_date"), path));
+                            tratarData(line.optString("publication_date")), path));
                 }
             }
             catch (JSONException e){
@@ -178,6 +178,14 @@ public class MainActivity extends AppCompatActivity {
             movieReviewArrayAdapter.notifyDataSetChanged();
             movieReviewListView.smoothScrollToPosition(0);
 
+        }
+
+        public String tratarData(String date){
+
+            String ano = date.substring(0, 4);
+            String mes = date.substring(5, 7);
+            String dia = date.substring(8, 10);
+            return dia+"/"+mes+"/"+ano;
         }
     }
 
