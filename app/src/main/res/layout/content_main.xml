@@ -9,10 +9,26 @@
     tools:context="br.com.fontes.thenynews.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Digite o nome do filme"/>
+        android:orientation="horizontal"
+        android:layout_row="6"
+        android:layout_column="0">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/txtMessage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/message"
+                android:contentDescription="@string/message"/>
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +37,8 @@
         <ListView
             android:id="@+id/movieReviewList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 

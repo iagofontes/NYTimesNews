@@ -1,5 +1,6 @@
 package br.com.fontes.thenynews;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         movieReviewArrayAdapter = new MovieReviewArrayAdapter(this.getApplicationContext(), reviews);
         movieReviewListView.setAdapter(movieReviewArrayAdapter);
 
+
         movieReviewListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -65,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
                     params.putString("data", mr.getDate_publ());
                     params.putString("imgSrc", mr.getImgPath());
                     in.putExtras(params);
-                    startActivity(in);
+                    startActivityForResult(in, 0);
+//                    startActivity(in);
                 }
 
             }
@@ -78,16 +83,34 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view, "Realizar a pesquisa por aqui.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
+//                dismissKeyboardShortcutsHelper();
+//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow((view.findViewById(R.id.txtMessage)).getWindowToken(), 0);
+
+//                view.getContext().getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
 
                 URL url = null;
                 try{
-                    url = new URL("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=476fa32b122d474595bb695e05484c59&q=fastandfurious");
+//                    url = new URL("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=476fa32b122d474595bb695e05484c59&q=fastandfurious");
+                    Context con = getApplicationContext();
+                    EditText filmField = (EditText) findViewById(R.id.txtMessage);
+//                    EditText filmField = (EditText) view.findViewById(R.id.txtMessage);
+                    String film = manageFilmName(filmField.getText().toString());
+                    String endereco = getResources().getString(R.string.endReq).toString();
+                    String chave = getResources().getString(R.string.chaveApi).toString();
+                    String uri = String.format(endereco, chave);
+                    uri += "&"+String.format(getResources().getString(R.string.queryApi).toString(), film);
+//                    uri += "&"+String.format(getResources().getString(R.string.queryApi).toString(), "fastandfurious");
+                    url = new URL(uri);
                 }catch (Exception e){
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
                 if (url != null){
-//            dismissKeyboard (locationEditText);
                     GetMoviesReview getDonates =
                             new GetMoviesReview();
                     getDonates.execute(url);
@@ -97,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+}
+    public String manageFilmName(String filme){
+        String nome = "";
+
+        nome = filme.toLowerCase().replaceAll(" ", "");
+
+        return nome;
     }
 
     @Override

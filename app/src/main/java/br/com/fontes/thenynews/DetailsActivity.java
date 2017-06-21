@@ -1,12 +1,12 @@
 package br.com.fontes.thenynews;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,13 +14,18 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static br.com.fontes.thenynews.R.layout.activity_details;
+
 public class DetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-        Context ct = this.getApplicationContext();
+        setContentView(activity_details);
+
+        //habilita o botão para voltar a activity anterior
+        android.support.v7.app.ActionBar actionBar = this.getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ImageView imgMovieField = (ImageView) this.findViewById(R.id.imgMovie);
         TextView txtTituloField = (TextView) this.findViewById(R.id.movieName);
@@ -30,17 +35,12 @@ public class DetailsActivity extends AppCompatActivity {
         Bundle param = intent.getExtras();
 
         if(param != null){
-//            Format format = new SimpleDateFormat("dd/MM/yyyy");
-//            String date = format.format(param.getString("data"));
+
             String ano = param.getString("data").substring(0, 4);
             String mes = param.getString("data").substring(5, 7);
             String dia = param.getString("data").substring(8, 10);
 
-
-
             txtTituloField.setText(param.getString("titulo"));
-//            txtDateField.setText(dia+"/"+mes+"/"+ano);
-//            txtDateField.setText(dateFormat.format(date));
             txtDateField.setText(param.getString("data"));
             String src = param.getString("imgSrc");
             if((src != "") && (src != null)){
@@ -48,6 +48,11 @@ public class DetailsActivity extends AppCompatActivity {
                 dit.execute(src);
             }
         }
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
