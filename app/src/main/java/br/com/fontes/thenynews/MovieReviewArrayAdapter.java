@@ -48,8 +48,10 @@ public class MovieReviewArrayAdapter extends ArrayAdapter<MovieReviews>{
         else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
-        viewHolder.titleTextView.setText(mvr.getTitle());
-        viewHolder.publicationTextView.setText(mvr.getDate_publ());
+        viewHolder.titleTextView.setText(
+                this.getContext().getResources().getString(R.string.filmDetail).toString() + mvr.getTitle());
+        viewHolder.publicationTextView.setText(
+                this.getContext().getResources().getString(R.string.dateDetail).toString() + mvr.getDate_publ());
 //        viewHolder.titleTextView.setText("Oieeeee");
 
         //baixar a imagem aqui

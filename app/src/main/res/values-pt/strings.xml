@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The NY News</string>
+    <string name="dateDetail">"Data: "</string>
+    <string name="filmDetail">"Filme: "</string>
+    <string name="message">Nome do filme</string>
+    <string name="nomeFilme">"Nome do Filme: "</string>
+</resources>

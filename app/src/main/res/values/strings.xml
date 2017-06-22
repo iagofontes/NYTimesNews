@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">The NY News</string>
     <string name="action_settings">Settings</string>
-    <string name="message">Digite o nome do filme</string>
+    <string name="message">Movie name</string>
     <string name="chaveApi">476fa32b122d474595bb695e05484c59</string>
     <string name="endReq">https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=%s</string>
     <string name="queryApi">q=%s</string>
+    <string name="nomeFilme">"Movie name: "</string>
+    <string name="filmDetail">"Movie: "</string>
+    <string name="dateDetail">"Date: "</string>
+
 
 
 

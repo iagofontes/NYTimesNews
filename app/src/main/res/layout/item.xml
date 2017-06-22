@@ -32,8 +32,8 @@
             android:layout_marginTop="10dp"
             android:gravity="left|center_vertical"
             android:hint="Film name"
-            android:textColor="@android:color/background_dark"
-            android:textColorHint="@android:color/background_dark"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="14dp" />
 
@@ -47,8 +47,8 @@
             android:layout_marginTop="20dp"
             android:gravity="left|center_vertical"
             android:hint="Publication"
-            android:textColor="@android:color/background_dark"
-            android:textColorHint="@android:color/background_dark"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             tools:layout_editor_absoluteX="134dp"
             tools:layout_editor_absoluteY="41dp" />
     </LinearLayout>

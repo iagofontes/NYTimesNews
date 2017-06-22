@@ -54,14 +54,23 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView txtTitulo = (TextView) view.findViewById(R.id.titleMovie);
 
-                int i=0;
+                int i=0, achou=0;
                 String titulo = txtTitulo.getText().toString();
-                while(!titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
+                String movie="";
+                while(i<reviews.size()){
+//                while(!titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
+                    movie = titulo.replaceAll(getResources().getString(R.string.filmDetail).toString(), "")
+                            .replaceAll(" ", "");
+                    if(movie.equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
+                        achou = i;
+                        break;
+                    }
                     i++;
                 }
-                if(titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
+//                if(titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
+                if(movie.replaceAll(" ", "").equalsIgnoreCase(reviews.get(achou).getTitle().replaceAll(" ", ""))){
 
-                    MovieReviews mr = reviews.get(i);
+                    MovieReviews mr = reviews.get(achou);
 
                     Intent in = new Intent(view.getContext(), DetailsActivity.class);
                     Bundle params = new Bundle();
@@ -69,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     params.putString("data", mr.getDate_publ());
                     params.putString("imgSrc", mr.getImgPath());
                     in.putExtras(params);
-                    startActivityForResult(in, 0);
+                    startActivityForResult(in, RESULT_OK);
 //                    startActivity(in);
                 }
 
@@ -83,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view, "Realizar a pesquisa por aqui.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-//                dismissKeyboardShortcutsHelper();
-//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow((view.findViewById(R.id.txtMessage)).getWindowToken(), 0);
 
-//                view.getContext().getCurrentFocus();
+                reviews.clear();
+                movieReviewArrayAdapter.notifyDataSetChanged();
+                movieReviewListView.smoothScrollToPosition(0);
+
                 if (view != null) {
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -120,9 +129,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-
-}
     public String manageFilmName(String filme){
         String nome = "";
 

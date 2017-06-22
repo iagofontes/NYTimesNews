@@ -25,7 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/message"
-                android:contentDescription="@string/message"/>
+                android:contentDescription="@string/message"
+                android:textColor="@color/textColor"/>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 

@@ -40,8 +40,8 @@ public class DetailsActivity extends AppCompatActivity {
             String mes = param.getString("data").substring(5, 7);
             String dia = param.getString("data").substring(8, 10);
 
-            txtTituloField.setText(param.getString("titulo"));
-            txtDateField.setText(param.getString("data"));
+            txtTituloField.setText(this.getResources().getString(R.string.filmDetail).toString() + param.getString("titulo"));
+            txtDateField.setText(this.getResources().getString(R.string.dateDetail).toString() + param.getString("data"));
             String src = param.getString("imgSrc");
             if((src != "") && (src != null)){
                 DownloadImageTask dit = new DownloadImageTask(imgMovieField);
@@ -50,8 +50,10 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivityForResult(myIntent, 0);
+        setResult(RESULT_OK);
+        finish();
+        /*Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivityForResult(myIntent, 0);*/
         return true;
     }
 
