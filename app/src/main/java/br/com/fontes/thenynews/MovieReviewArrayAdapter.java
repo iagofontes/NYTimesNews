@@ -26,6 +26,7 @@ public class MovieReviewArrayAdapter extends ArrayAdapter<MovieReviews>{
         ImageView imgNews;
         TextView titleTextView;
         TextView publicationTextView;
+//        TextView summaryTextView;
     }
 
     public MovieReviewArrayAdapter (Context context, List<MovieReviews> forecast){
@@ -43,6 +44,7 @@ public class MovieReviewArrayAdapter extends ArrayAdapter<MovieReviews>{
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.titleMovie);
             viewHolder.publicationTextView = (TextView) convertView.findViewById(R.id.datePublic);
             viewHolder.imgNews =  (ImageView) convertView.findViewById(R.id.imageView);
+//            viewHolder.summaryTextView =  (TextView) convertView.findViewById(R.id.descrMovie);
             convertView.setTag(viewHolder);
         }
         else{
@@ -52,12 +54,16 @@ public class MovieReviewArrayAdapter extends ArrayAdapter<MovieReviews>{
                 this.getContext().getResources().getString(R.string.filmDetail).toString() + mvr.getTitle());
         viewHolder.publicationTextView.setText(
                 this.getContext().getResources().getString(R.string.dateDetail).toString() + mvr.getDate_publ());
+//        viewHolder.publicationTextView.setText(
+//                this.getContext().getResources().getString(R.string.summary).toString() + mvr.getSummary());
 //        viewHolder.titleTextView.setText("Oieeeee");
 
         //baixar a imagem aqui
         if((mvr.getImgPath() != null) && (mvr.getImgPath()  != "")){
             DownloadImageTask dit = new DownloadImageTask(viewHolder.imgNews);
             dit.execute(mvr.getImgPath());
+        }else{
+            viewHolder.imgNews.setImageResource(R.mipmap.imgvideo);
         }
         return convertView;
     }

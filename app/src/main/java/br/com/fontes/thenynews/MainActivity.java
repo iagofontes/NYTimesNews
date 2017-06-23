@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     params.putString("titulo", mr.getTitle());
                     params.putString("data", mr.getDate_publ());
                     params.putString("imgSrc", mr.getImgPath());
+                    params.putString("summary", mr.getSummary());
                     in.putExtras(params);
                     startActivityForResult(in, RESULT_OK);
 //                    startActivity(in);
@@ -104,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
                 URL url = null;
                 try{
-//                    url = new URL("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=476fa32b122d474595bb695e05484c59&q=fastandfurious");
+//                    url = new URL("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=476fa32b122d474595bb695e05484c59&query=cars 3");
+//                    url = new URL("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=476fa32b122d474595bb695e05484c59&query=cars%203");
                     Context con = getApplicationContext();
                     EditText filmField = (EditText) findViewById(R.id.txtMessage);
 //                    EditText filmField = (EditText) view.findViewById(R.id.txtMessage);
@@ -120,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (url != null){
-                    GetMoviesReview getDonates =
-                            new GetMoviesReview();
-                    getDonates.execute(url);
+//                    GetMoviesReview getReviews = new GetMoviesReview();
+                    GetMoviesReview getReviews = new GetMoviesReview(view);
+                    getReviews.execute(url);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Cannot create a URL.", Toast.LENGTH_LONG).show();
@@ -134,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
     public String manageFilmName(String filme){
         String nome = "";
 
-        nome = filme.toLowerCase().replaceAll(" ", "");
+        nome = filme.toLowerCase().replaceAll(" ", "%20");
 
-        return nome;
+        return "%27"+nome+"%27";
     }
 
     @Override
@@ -162,6 +165,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class GetMoviesReview extends AsyncTask<URL, Void, JSONObject> {
+        View view;
+        public GetMoviesReview(View v){
+            this.view = v;
+        }
         protected JSONObject doInBackground(URL... params) {
             HttpURLConnection connection = null;
             try {
@@ -197,14 +204,30 @@ public class MainActivity extends AppCompatActivity {
         private void convertJSONToArrayList (JSONObject forecast){
             reviews.clear();
             try{
-                JSONArray list = forecast.getJSONArray("results");
-                for (int i = 0; i < list.length(); i++){
-                    JSONObject line = list.getJSONObject(i);
-                    JSONObject mult = line.getJSONObject("multimedia");
-                    String path = "";
-                    path = mult.getString("src");
-                    reviews.add(new MovieReviews(null, line.optString("display_title"),
-                            tratarData(line.optString("publication_date")), path));
+//                JSONObject lineResults = forecast.getJSONObject("");
+//                if(Integer.parseInt(lineResults.getString("num_results")) > 0){
+                Integer lineResult = Integer.parseInt(forecast.getString("num_results"));
+                if(lineResult > 0){
+                    JSONArray list = forecast.getJSONArray("results");
+                    for (int i = 0; i < list.length(); i++){
+                        JSONObject line = list.getJSONObject(i);
+                        if(!line.isNull("multimedia")){
+//                        if(line.getJSONObject("multimedia") != null){
+                            JSONObject mult = line.getJSONObject("multimedia");
+                            String path = "";
+                            path = mult.getString("src");
+                            reviews.add(new MovieReviews(null, line.optString("display_title"),
+                                    tratarData(line.optString("publication_date")), line.optString("summary_short"), path));
+                        }else{
+                            Snackbar.make(this.view, getResources().getString(R.string.noImgSrc), Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                            reviews.add(new MovieReviews(null, line.optString("display_title"),
+                                    tratarData(line.optString("publication_date")), line.optString("summary_short")));
+                        }
+                    }
+                }else{
+                    Snackbar.make(this.view, getResources().getString(R.string.noItem), Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }
             }
             catch (JSONException e){

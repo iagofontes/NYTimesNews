@@ -12,12 +12,22 @@ public class MovieReviews {
     String title;
     String date_publ;
     String imgPath;
+    String summary;
 
-    public MovieReviews(Bitmap img, String title, String date_publ, String imgPath){
+    public MovieReviews(Bitmap img, String title, String date_publ, String Summary, String imgPath){
         setImg(img);
         setTitle(title);
         setDate_publ(date_publ);
+        setSummary(Summary);
         setImgpath(imgPath);
+    }
+
+    public MovieReviews(Bitmap img, String title, String date_publ, String Summary){
+        setImg(img);
+        setTitle(title);
+        setDate_publ(date_publ);
+        setSummary(Summary);
+        setImgpath(null);
     }
 
     public Bitmap getImg() {
@@ -50,6 +60,14 @@ public class MovieReviews {
 
     public void setImgpath(String imgPath){
         this.imgPath = imgPath;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String text) {
+        this.summary = text;
     }
 
 

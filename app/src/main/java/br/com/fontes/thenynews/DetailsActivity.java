@@ -30,6 +30,7 @@ public class DetailsActivity extends AppCompatActivity {
         ImageView imgMovieField = (ImageView) this.findViewById(R.id.imgMovie);
         TextView txtTituloField = (TextView) this.findViewById(R.id.movieName);
         TextView txtDateField = (TextView) this.findViewById(R.id.movieDatePublic);
+        TextView txtSummary = (TextView) this.findViewById(R.id.descrMovie);
 
         Intent intent = getIntent();
         Bundle param = intent.getExtras();
@@ -42,6 +43,7 @@ public class DetailsActivity extends AppCompatActivity {
 
             txtTituloField.setText(this.getResources().getString(R.string.filmDetail).toString() + param.getString("titulo"));
             txtDateField.setText(this.getResources().getString(R.string.dateDetail).toString() + param.getString("data"));
+            txtSummary.setText(this.getResources().getString(R.string.summary).toString() + param.getString("summary"));
             String src = param.getString("imgSrc");
             if((src != "") && (src != null)){
                 DownloadImageTask dit = new DownloadImageTask(imgMovieField);

@@ -23,10 +23,12 @@
             <EditText
                 android:id="@+id/txtMessage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/message"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:contentDescription="@string/message"
-                android:textColor="@color/textColor"/>
+                android:elevation="24dp"
+                android:hint="@string/message"
+                android:textColor="@color/textColor" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
@@ -39,7 +41,7 @@
             android:id="@+id/movieReviewList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="30dp" />
 
     </LinearLayout>
 

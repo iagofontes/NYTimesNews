@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">The NY News</string>
+    <string name="action_settings">Configuración</string>
+    <string name="dateDetail">"Fecha: "</string>
+    <string name="filmDetail">"Películas: "</string>
+    <string name="message">Nombre de la película</string>
+    <string name="noItem">Ninguna película encontrada.</string>
+    <string name="nomeFilme">"Nombre de la película: "</string>
+</resources>

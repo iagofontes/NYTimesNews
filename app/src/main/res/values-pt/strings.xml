@@ -5,4 +5,6 @@
     <string name="filmDetail">"Filme: "</string>
     <string name="message">Nome do filme</string>
     <string name="nomeFilme">"Nome do Filme: "</string>
+    <string name="noItem">Nenhum filme encontrado.</string>
+    <string name="action_settings">Configurações</string>
 </resources>
