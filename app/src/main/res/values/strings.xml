@@ -10,7 +10,7 @@
     <string name="filmDetail">"Movie: "</string>
     <string name="dateDetail">"Date: "</string>
     <string name="noItem">Anyone movies found.</string>
-    <string name="noImgSrc">Anyone image found.</string>
+    <string name="noImgSrc">No one image found.</string>
     <string name="summary">"Summary: "</string>
 
 

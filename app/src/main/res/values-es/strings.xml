@@ -7,4 +7,6 @@
     <string name="message">Nombre de la película</string>
     <string name="noItem">Ninguna película encontrada.</string>
     <string name="nomeFilme">"Nombre de la película: "</string>
+    <string name="summary">"Resumen: "</string>
+    <string name="noImgSrc">No se encontraron imágenes.</string>
 </resources>

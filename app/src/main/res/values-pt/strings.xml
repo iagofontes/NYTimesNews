@@ -7,4 +7,6 @@
     <string name="nomeFilme">"Nome do Filme: "</string>
     <string name="noItem">Nenhum filme encontrado.</string>
     <string name="action_settings">Configurações</string>
+    <string name="summary">"Resumo: "</string>
+    <string name="noImgSrc">Nenhuma imagem encontrada.</string>
 </resources>
