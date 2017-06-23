@@ -49,7 +49,6 @@ public class DetailsActivity extends AppCompatActivity {
                 DownloadImageTask dit = new DownloadImageTask(imgMovieField);
                 dit.execute(src);
                 imgMovieField.setContentDescription(param.getString("titulo"));
-
             }
         }
     }

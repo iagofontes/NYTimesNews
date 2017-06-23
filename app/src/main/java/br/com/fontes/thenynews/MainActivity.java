@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 String titulo = txtTitulo.getText().toString();
                 String movie="";
                 while(i<reviews.size()){
-//                while(!titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
                     movie = titulo.replaceAll(getResources().getString(R.string.filmDetail).toString(), "")
                             .replaceAll(" ", "");
                     if(movie.equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     i++;
                 }
-//                if(titulo.replaceAll(" ", "").equalsIgnoreCase(reviews.get(i).getTitle().replaceAll(" ", ""))){
                 if(movie.replaceAll(" ", "").equalsIgnoreCase(reviews.get(achou).getTitle().replaceAll(" ", ""))){
 
                     MovieReviews mr = reviews.get(achou);
@@ -81,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                     params.putString("summary", mr.getSummary());
                     in.putExtras(params);
                     startActivityForResult(in, RESULT_OK);
-//                    startActivity(in);
                 }
 
             }
@@ -92,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Realizar a pesquisa por aqui.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-
                 reviews.clear();
                 movieReviewArrayAdapter.notifyDataSetChanged();
                 movieReviewListView.smoothScrollToPosition(0);
@@ -106,24 +100,19 @@ public class MainActivity extends AppCompatActivity {
 
                 URL url = null;
                 try{
-//                    url = new URL("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=476fa32b122d474595bb695e05484c59&query=cars 3");
-//                    url = new URL("https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=476fa32b122d474595bb695e05484c59&query=cars%203");
                     Context con = getApplicationContext();
                     EditText filmField = (EditText) findViewById(R.id.txtMessage);
-//                    EditText filmField = (EditText) view.findViewById(R.id.txtMessage);
                     String film = manageFilmName(filmField.getText().toString());
                     String endereco = getResources().getString(R.string.endReq).toString();
                     String chave = getResources().getString(R.string.chaveApi).toString();
                     String uri = String.format(endereco, chave);
                     uri += "&"+String.format(getResources().getString(R.string.queryApi).toString(), film);
-//                    uri += "&"+String.format(getResources().getString(R.string.queryApi).toString(), "fastandfurious");
                     url = new URL(uri);
                 }catch (Exception e){
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
                 if (url != null){
-//                    GetMoviesReview getReviews = new GetMoviesReview();
                     GetMoviesReview getReviews = new GetMoviesReview(view);
                     getReviews.execute(url);
                 }
@@ -204,15 +193,12 @@ public class MainActivity extends AppCompatActivity {
         private void convertJSONToArrayList (JSONObject forecast){
             reviews.clear();
             try{
-//                JSONObject lineResults = forecast.getJSONObject("");
-//                if(Integer.parseInt(lineResults.getString("num_results")) > 0){
                 Integer lineResult = Integer.parseInt(forecast.getString("num_results"));
                 if(lineResult > 0){
                     JSONArray list = forecast.getJSONArray("results");
                     for (int i = 0; i < list.length(); i++){
                         JSONObject line = list.getJSONObject(i);
                         if(!line.isNull("multimedia")){
-//                        if(line.getJSONObject("multimedia") != null){
                             JSONObject mult = line.getJSONObject("multimedia");
                             String path = "";
                             path = mult.getString("src");
